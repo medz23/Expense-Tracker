@@ -15,6 +15,36 @@ const someTransactions = [
 
 let transactions = someTransactions;
 
+//add transaction
+function addTransaction(e) {
+  e.preventDefault();
+
+  if(text.value.trim() === '' || amount.value.trim() === '') {
+    alert('Please add a text and amount');
+
+  }
+  else{
+    const transaction = {
+      id: generateID(),
+      text: text.value,
+      amount: +amount.value
+    };
+
+    transactions.push(transaction);
+
+    addTransactionsDOM(transaction);
+    updateValues();
+
+    text.value = '';
+    amount.value = '';
+  }
+}
+
+//generate id
+function generateID() {
+  return Math.floor(Math.random() * 10000000000);
+}
+
 // transactions => DOM
 
 function addTransactionsDOM(transaction) {
@@ -63,3 +93,5 @@ function init() {
 }
 
 init();
+
+form.addEventListener('submit', addTransaction)
